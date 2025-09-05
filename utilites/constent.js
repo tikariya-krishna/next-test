@@ -1,0 +1,1 @@
+export const imgUrl = "https://upload.wikimedia.org/wikipedia/commons/a/a2/ESO_OGLE-2005-BLG-390Lb.jpg"
