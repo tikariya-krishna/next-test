@@ -18,6 +18,7 @@ const Navigation = () => {
                         <li className=''><Link href="/">Home</Link></li>
                         <li><Link href="/about">About</Link></li>
                         <li><Link href="/service">Service</Link></li>
+                        <li><Link href="/service">test</Link></li>
                     </ul>
                 </div>
             </div>
