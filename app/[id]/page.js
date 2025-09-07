@@ -5,9 +5,9 @@ import { useSelector } from 'react-redux'
 
 const Page = () => {
     const { id } = useParams();
-    console.log(id)
+    // console.log(id)
     const data = useSelector((store)=> store.blog.data)
-    console.log(data?.[0]?.[`${id}`])
+    // console.log(data?.[0]?.[`${id}`])
 
     const {urlToImage, title, description} = data?.[0]?.[`${id}`];
   return (

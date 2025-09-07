@@ -1,9 +1,10 @@
 "use client"
 import Link from "next/link"
 import { useSelector } from "react-redux"
-
+import useFetchingData from '@/utilites/useFetchingData'
 
 const Post = () => {
+  useFetchingData();
   const data = useSelector((store)=>store.blog.data)
   
   return (

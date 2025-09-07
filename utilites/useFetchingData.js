@@ -20,3 +20,4 @@ const useFetchingData = () =>{
 }
 
 export default useFetchingData
+
