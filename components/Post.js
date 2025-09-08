@@ -4,24 +4,22 @@ import { useSelector } from "react-redux"
 import useFetchingData from '@/utilites/useFetchingData'
 
 const Post = () => {
-  useFetchingData();
   const data = useSelector((store)=>store.blog.data)
+  // console.log(data);
   
   return (
     <>
       <div className="p-5">
-      <h1 className="text-2xl font-bold mb-4">Posts</h1>
+      <h1 className="text-2xl font-bold mb-4">Blog Posts</h1>
 
-      <div className="space-y-4">
-        {data == 0 ? "no data" : data[0].map((post,idx) => (
-          <Link href={`/${idx}`} key={idx} >
+      <div className="space-y-4 grid grid-cols-3 gap-4">
+        {data == 0 ? "no data" : data.map((post) => (
+          <Link href={`/${post.id}`} key={post.id} >
             <div className="border p-3 rounded cursor-pointer hover:bg-gray-200 mb-3">
-            <div className="grid grid-cols-12 gap-2">
-              <div className="col-span-4"><img src={post.urlToImage}/></div>
-              <div className="col-span-8">
-                <h2 className="font-semibold text-2xl">{post.title}</h2>
-                <p className="text-gray-600">{post.description}</p>
-              </div>
+            <div className="space-y-4">
+                <img src={post.featured_image} className="h-48 w-full"/>
+                <h2 className="font-semibold text-2xl line-clamp-1">{post.title}</h2>
+                <p className="text-gray-600 flex-grow line-clamp-3">{post.main_content}</p>
             </div>
             </div>
           </Link>

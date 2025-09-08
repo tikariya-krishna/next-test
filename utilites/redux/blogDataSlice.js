@@ -8,7 +8,7 @@ const blogDataSlice = createSlice({
   },
   reducers: {
     addCardItems: (state, action) => {
-      state.data.push(action.payload);
+      state.data = action.payload; 
     }
   }
 });
