@@ -12,7 +12,7 @@ const Post = () => {
       <div className="p-5">
       <h1 className="text-2xl font-bold mb-4">Blog Posts</h1>
 
-      <div className="space-y-4 grid grid-cols-3 gap-4">
+      <div className="space-y-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
         {data == 0 ? "no data" : data.map((post) => (
           <Link href={`/${post.id}`} key={post.id} >
             <div className="border p-3 rounded cursor-pointer hover:bg-gray-200 mb-3">

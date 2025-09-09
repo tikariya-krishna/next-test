@@ -5,7 +5,7 @@ import FetchWrapper from "@/utilites/FetchWrapper";
 const page = () => {
   return (
     <>
-      <div className="px-32">
+      <div className="px-5 md:px-32">
         <FetchWrapper/>
         <Introduction/>
         <Post/>
