@@ -1,7 +1,6 @@
 "use client"; 
-import "./globals.css";
-import { Provider } from "react-redux";
-import store from "@/utilites/redux/store";
+import "../globals.css";
+import Navigation from "@/components/Navigation";
 
 
 export default function RootLayout({ children }) {
@@ -9,9 +8,8 @@ export default function RootLayout({ children }) {
     
     <html lang="en">
       <body className="">   
-        <Provider store={store}>
+        <div className="fixed w-full"><Navigation/></div>
         {children}
-        </Provider>
       </body>
     </html>
     

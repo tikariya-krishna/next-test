@@ -1,9 +1,27 @@
-
-
+"use client"
+import { allBlog } from '@/services/blogServices.js'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { addCardItems } from '@/utilites/redux/blogDataSlice'
 const Introduction = () => {
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    const load = async() =>{
+      try {
+        const { result } = await allBlog();
+        if(result){
+            dispatch(addCardItems(result));
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    load();
+  },[])
   return (
     <>
-    <div className="mt-16">
+    <div className="pt-24">
         <p className="text-center text-4xl font-bold mb-3">BLOG</p>
         <div className=""><img src="https://siddhidigitalacademy.com/wp-content/uploads/2025/01/pngtree-man-avatar-image-for-profile-png-image_13001877.png" alt="Profile image" className="w-[200px] h-[200px] border-2 rounded-lg primary-bg mx-auto md:mx-0"/></div>
         <div className=" my-auto p-4">

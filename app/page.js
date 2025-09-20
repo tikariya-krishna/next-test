@@ -1,15 +1,10 @@
-import Introduction from "@/components/Introduction"
-import Post from "@/components/Post"
-import FetchWrapper from "@/utilites/FetchWrapper";
+
+import Registration from "@/components/Registration"
 
 const page = () => {
   return (
     <>
-      <div className="px-5 md:px-32">
-        <FetchWrapper/>
-        <Introduction/>
-        <Post/>
-      </div>
+      <Registration/>
     </>
   )
 }

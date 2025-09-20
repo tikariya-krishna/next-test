@@ -3,9 +3,9 @@ import Link from "next/link"
 import { useSelector } from "react-redux"
 import ShimmerCard from "./ShimmerCard"
 
+
 const Post = () => {
   const data = useSelector((store)=>store.blog.data)
-  // console.log(data);
   
   return (
     <>
@@ -17,12 +17,12 @@ const Post = () => {
           )
         :
           data.map((post) => (
-          <Link href={`/${post.id}`} key={post.id} prefetch={true}>
+          <Link href={`/${post._id}`} key={post._id} prefetch={true}>
             <div className="border p-3 rounded cursor-pointer hover:bg-gray-200 mb-3">
             <div className="space-y-4">
-                <img src={post.featured_image} className="h-64 w-full"/>
+                <img src="/photo.png" className="h-64 w-full"/>
                 <h2 className="font-semibold text-2xl line-clamp-1">{post.title}</h2>
-                <p className="text-gray-600 flex-grow line-clamp-3">{post.main_content}</p>
+                <p className="text-gray-600 flex-grow line-clamp-3">{post.description}</p>
             </div>
             </div>
           </Link>
