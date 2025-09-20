@@ -11,13 +11,16 @@ const Page = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      try {
-        const parsed = JSON.parse(storedUser);
-        setUserId(parsed._id || "");
-      } catch (err) {
-        console.error("Invalid JSON in localStorage:", err);
+    // ✅ Only access localStorage if we're in the browser
+    if (typeof window !== "undefined") {
+      const storedUser = localStorage.getItem("user");
+      if (storedUser) {
+        try {
+          const parsed = JSON.parse(storedUser);
+          setUserId(parsed._id || "");
+        } catch (err) {
+          console.error("Invalid JSON in localStorage:", err);
+        }
       }
     }
   }, []);
