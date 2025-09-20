@@ -1,6 +1,6 @@
 "use client";
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const Navigation = () => {
     const [logOutMenu, setLogOutMenu] = useState(false);
@@ -11,8 +11,11 @@ const Navigation = () => {
         window.location.href = "/login"; // Redirect to login
     };
 
-    const data = localStorage.getItem("user");
-    const userName = JSON.parse(data)?.name;
+    useEffect(() => {
+
+        const data = localStorage.getItem("user");
+        const userName = JSON.parse(data)?.name;
+    }, []);
   return (
     <>
         <nav className='container px-10 py-5 primary-bg secondry-text'>
