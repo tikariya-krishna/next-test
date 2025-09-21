@@ -16,14 +16,14 @@ const Registration = () => {
   const handleSubmit = async() => {
     setLoader(true);
     const isValid = validation(email.current.value, password.current.value);
-    if(!isValid) {
+    if(isValid) {
       setError(isValid);
       setLoader(false);
       return;
     }
 
     try {
-      const fatchData = await fetch("http://localhost:3000/api/user",{
+      const fatchData = await fetch("/api/user",{
         method: "POST",
         headers:{
           "Content-Type":"application/json",
