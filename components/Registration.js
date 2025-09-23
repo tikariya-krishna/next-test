@@ -32,6 +32,7 @@ const Registration = () => {
           fname: fullName.current.value,
           email: email.current.value,
           password: password.current.value,
+          userType: "user",
         }),
         })
       const data = await fatchData.json();

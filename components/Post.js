@@ -18,9 +18,9 @@ const Post = () => {
         :
           data.map((post) => (
           <Link href={`/${post._id}`} key={post._id} prefetch={true}>
-            <div className="border p-3 rounded cursor-pointer hover:bg-gray-200 mb-3">
+            <div className="border p-3 rounded cursor-pointer hover:bg-gray-200 mb-3 ">
             <div className="space-y-4">
-                <img src="/photo.png" className="h-64 w-full"/>
+                <img src={ post.blogImg } className="h-64 [&>*:nth-child(2)]:h-80 w-full"/>
                 <h2 className="font-semibold text-2xl line-clamp-1">{post.title}</h2>
                 <p className="text-gray-600 flex-grow line-clamp-3">{post.description}</p>
             </div>

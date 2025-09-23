@@ -18,11 +18,11 @@ export const GET = async() =>{
 
 export const POST = async(request)=>{
     const payload = await request.json();
-    
+    console.log("Payload received in POST /api/blog:", payload);
     try{
     await mongoose.connect(process.env.MONGO_URL)
     const blog = new Blog(payload)
-    
+    console.log("Blog instance created:", blog);
     const data = await blog.save();
     return NextResponse.json({result:data});
     }catch(error){

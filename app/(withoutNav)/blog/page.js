@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 const Page = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [blogImg, setBlogImg] = useState(null);
   const [userId, setUserId] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
@@ -34,7 +35,7 @@ const Page = () => {
       const res = await fetch("/api/blog", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title, description, user_id: userId }),
+        body: JSON.stringify({ title, description, user_id: userId , blogImg}),
       });
 
       const data = await res.json();
@@ -79,6 +80,14 @@ const Page = () => {
           className="w-full px-3 py-2 border rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400"
           required
         />
+        <input type="file" accept="image/*"
+        onChange={async (e) => {
+          const file = e.target.files[0];
+          if (file) {
+            const base64 = await convertToBase64(file);
+            setBlogImg(base64); // save base64 string in state
+          }
+        }}/>
 
         <button
           type="submit"
@@ -101,3 +110,13 @@ const Page = () => {
 };
 
 export default Page;
+
+
+const convertToBase64 = (file) =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });

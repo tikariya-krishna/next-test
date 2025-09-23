@@ -7,7 +7,7 @@ export const POST = async (request) => {
     const req = await request.json();
     await mongoose.connect(process.env.MONGO_URL);
 
-    const {email, password, fname} = req;
+    const {email, password, fname, userType} = req;
     if(!fname || !email || !password){
         return NextResponse.json({message: "All fields are required!"}, {status: 400});
     }
@@ -26,6 +26,7 @@ export const POST = async (request) => {
         name:fname,
         email:email,
         password:hashedPassword,
+        userType:userType,
     })
     const savedUser = await newUser.save();
     return NextResponse.json({message: "User registered successfully"}, {status: 201});
