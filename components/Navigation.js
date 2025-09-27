@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 const Navigation = () => {
   const [logOutMenu, setLogOutMenu] = useState(false);
   const [userName, setUserName] = useState("");
+  const [parsed, setParsed] = useState(false);
 
   // ✅ Safely get username from localStorage
   useEffect(() => {
@@ -14,6 +15,10 @@ const Navigation = () => {
         try {
           const parsed = JSON.parse(storedUser);
           setUserName(parsed?.name || "");
+
+          if (parsed?.userType === "admin") {
+                setParsed(true);
+          }
         } catch (err) {
           console.error("Invalid user in localStorage:", err);
         }
@@ -31,7 +36,7 @@ const Navigation = () => {
   };
 
   return (
-    <nav className="container px-10 py-5 primary-bg secondry-text">
+    <nav className=" px-10 py-5 primary-bg secondry-text w-full">
       <div className="flex justify-between items-center">
         {/* LOGO */}
         <h1 className="font-semibold text-2xl">BLOG</h1>
@@ -47,6 +52,11 @@ const Navigation = () => {
           <li>
             <Link href="/blog">Blog</Link>
           </li>
+          {parsed && (
+            <li>
+              <Link href="/list">List</Link>
+            </li>
+          )}
         </ul>
 
         {/* User dropdown */}

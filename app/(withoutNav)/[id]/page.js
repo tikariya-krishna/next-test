@@ -45,7 +45,7 @@ const Page = () => {
         <div className="border p-3 rounded cursor-pointer hover:bg-gray-200 mb-24">
             <div className="grid grid-cols-12 gap-2">
               <div className="col-span-12 md:col-span-4">
-                <img src={blogImg}/>
+                <img src={blogImg} className='w-full'/>
                 </div>
               <div className="col-span-12 md:col-span-8">
                 <h2 className="font-semibold text-2xl">{title}</h2>

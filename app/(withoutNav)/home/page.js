@@ -18,7 +18,7 @@ const Page = () => {
 
   return (
     <>
-      <div className="px-5 md:px-32">
+      <div className="px-5 md:px-16 xl:px-32">
         <Introduction/>
         <Post/>
       </div>
