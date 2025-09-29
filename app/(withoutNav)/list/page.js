@@ -21,11 +21,11 @@ const Page = () => {
 
   return (
     <div className="py-24 bg-gray-50 ">
-      <ul className="w-3/5 space-y-6 mx-auto">
+      <ul className="lg:w-4/5 space-y-6 mx-2 lg:mx-auto">
         {data.map((item,) => (
           <li
             key={item._id}
-            className={`capitalize border px-5 py-2 rounded-lg shadow-lg bg-white relative overflow-hidden group  hover:shadow-2xl grid grid-cols-3 gap-4`}
+            className={`capitalize border px-5 py-2 rounded-lg shadow-lg bg-white relative overflow-hidden group  hover:shadow-2xl grid md:grid-cols-3 gap-4`}
           >
             {/* Trending Gradient Strip */}
             <span className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-pink-500 to-yellow-500 rounded-r-lg"></span>
