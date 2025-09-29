@@ -42,3 +42,18 @@ export const DELETE = async(request)=>{
         return NextResponse.json({error:"Failed to delete blog"},{status:500});
     }
 }
+
+export const PUT = async(request)=>{
+    try {
+        await mongoose.connect(process.env.MONGO_URL)
+        const payload = await request.json();
+        console.log("Payload received in PUT /api/blog:", payload);
+        const {id, title, description, blogImg} = payload;
+        const data = await Blog.findByIdAndUpdate(id, {title, description, blogImg}, {new:true});
+        console.log("Updated blog data:", data);
+        return NextResponse.json({result:data});
+    } catch (error) {
+        console.log(error);
+        return NextResponse.json({error: "Failed to update blog"},{status:500});
+    }
+}

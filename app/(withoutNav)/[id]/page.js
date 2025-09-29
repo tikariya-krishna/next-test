@@ -42,7 +42,7 @@ const Page = () => {
   return (
     <>
       <div className='pt-32'>
-        <div className="border p-3 rounded cursor-pointer hover:bg-gray-200 mb-24">
+        <div className="border p-3 rounded  hover:bg-gray-200 mb-24">
             <div className="grid grid-cols-12 gap-2">
               <div className="col-span-12 md:col-span-4">
                 <img src={blogImg} className='w-full'/>
@@ -50,15 +50,6 @@ const Page = () => {
               <div className="col-span-12 md:col-span-8">
                 <h2 className="font-semibold text-2xl">{title}</h2>
                 <p className="text-gray-600 text-justify">{description}</p>
-                {parsed == true ?
-                <>
-                 <button onClick={()=>deleteblogData(id)} className='bg-red-500 text-white px-3 py-1 rounded mt-3'>Delete</button> 
-                  <div className='mt-3'>  
-                    <span className='text-blue-500 underline cursor-pointer mr-3'>Edit</span>
-                    <span className='text-blue-500 underline cursor-pointer'>Read More</span>
-                  </div>
-                </>
-                : ""}
               </div>
             </div>
         </div>

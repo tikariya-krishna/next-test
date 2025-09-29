@@ -1,60 +1,62 @@
-"use client";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+"use client"
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'next/navigation'
+import { useSelector } from 'react-redux';
+import { resolve } from 'styled-jsx/css';
+
 
 const Page = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [blogImg, setBlogImg] = useState(null);
   const [preview, setPreview] = useState(null);
-  const [userId, setUserId] = useState("");
-  const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
+  const [message, setMessage] = useState("");
+  
+    const params = useParams()
+    console.log(params);
+    const data = useSelector((store) => store.blog.data);
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const storedUser = localStorage.getItem("user");
-      if (storedUser) {
+    useEffect(()=>{
+      if(data.length !== 0){
+        const blogData = data.find((item) => item._id === params.id);
+        console.log(blogData);
+
+        setTitle(blogData.title);
+        setDescription(blogData.description);
+        setBlogImg(blogData.blogImg);
+        setPreview(blogData.blogImg);
+      }
+    },[params?.id , data])
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setMessage("");
+        setLoading(true);
+
         try {
-          const parsed = JSON.parse(storedUser);
-          setUserId(parsed._id || "");
-        } catch (err) {
-          console.error("Invalid JSON in localStorage:", err);
+          const res = await fetch("/api/blog",{
+            method:"PUT",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify({id:params.id, title,description,blogImg})
+          })
+          const data = await res.json();
+          if(res.ok){
+            setMessage("✅ Blog updated successfully! Redirecting...");
+            setTimeout(() => window.location.href="/home", 2000);
+          }else{
+            setMessage(`❌ Failed: ${data.error || "Unknown error"}`);
+          }
+          
+        } catch (error) {
+          console.log(error);
+          setMessage("❌ Something went wrong!");
+
+        }finally{
+          setLoading(false);
         }
       }
-    }
-  }, []);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setMessage("");
-    setLoading(true);
-
-    try {
-      const res = await fetch("/api/blog", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title, description, user_id: userId, blogImg }),
-      });
-
-      const data = await res.json();
-
-      if (res.ok) {
-        setMessage("✅ Blog saved successfully! Redirecting...");
-        // setTimeout(() => router.push("/home"), 2000);
-      } else {
-        setMessage(`❌ Failed: ${data.error || "Unknown error"}`);
-      }
-    } catch (error) {
-      console.error(error);
-      setMessage("❌ Something went wrong while saving.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
+    <>
     <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-blue-100 to-purple-200 px-4">
       <form
         onSubmit={handleSubmit}
@@ -137,16 +139,17 @@ const Page = () => {
         )}
       </form>
     </div>
-  );
-};
 
-export default Page;
+    </>
+  )
+}
+
+export default Page
 
 const convertToBase64 = (file) =>
-  new Promise((resolve, reject) => {
+  new Promise((resolve,reject)=>{
     const reader = new FileReader();
     reader.readAsDataURL(file);
-
-    reader.onload = () => resolve(reader.result);
+    reader.onload =()=> resolve(reader.result);
     reader.onerror = (error) => reject(error);
-  });
+  })

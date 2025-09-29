@@ -3,6 +3,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { deleteblog } from "@/services/blogServices";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const Page = () => {
   const data = useSelector((store) => store.blog.data);
@@ -17,7 +18,6 @@ const Page = () => {
             alert(error.message);
           }
       }
-
 
   return (
     <div className="py-24 bg-gray-50 ">
@@ -43,7 +43,7 @@ const Page = () => {
             {/* Buttons */}
             <div className=" flex gap-4 align-right justify-end">
               <button className="cursor-pointer px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white rounded-lg shadow-md transition-transform duration-300 hover:-translate-y-1 active:scale-95">
-                <i className="fas fa-edit"></i>
+                <Link href={`/list/${item._id}`}> <i className="fas fa-edit"></i></Link>
               </button>
               <button onClick={()=>deleteblogData(item._id)} className="cursor-pointer px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded-lg shadow-md transition-transform duration-300 hover:-translate-y-1 active:scale-95">
                 <i className="fa-solid fa-trash-can"></i>

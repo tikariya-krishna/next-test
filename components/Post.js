@@ -17,20 +17,16 @@ const Post = () => {
           )
         :
           data.map((post) => (
-            <>
-            <div className="rounded hover:bg-gray-200 mb-3 ">
+            <div className="rounded hover:bg-gray-200 mb-3 " key={post._id}>
             <div className="space-y-2">
                 <img src={ post.blogImg } className="h-48 w-full rounded-t-lg object-cover"/>
                 <div className="p-2 space-y-1">
                   <h2 className="font-semibold text-2xl line-clamp-1">{post.title}</h2>
                   <p className="text-gray-600 flex-grow line-clamp-3">{post.description}</p>
-                  <Link href={`/${post._id}`} key={post._id} prefetch={true}><button className="text-blue-500 hover:underline mb-5 cursor-pointer">Read More</button></Link>
+                  <Link href={`/${post._id}`}  prefetch={true}><button className="text-blue-500 hover:underline mb-5 cursor-pointer">Read More</button></Link>
                 </div>
-
-
             </div>
             </div>
-            </>
         ))}
       </div>
     </div>
